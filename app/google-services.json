@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "653335672649",
+    "project_id": "mmscanner-8aaf9",
+    "storage_bucket": "mmscanner-8aaf9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653335672649:android:219d5b63e107408322cc98",
+        "android_client_info": {
+          "package_name": "com.adi.mmscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653335672649-pplpdn44dc6sm8qntrlmsh4ucvffmrs3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOuDg_sUMn1dm6afvRs17q7BaYM8s0Llw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653335672649-pplpdn44dc6sm8qntrlmsh4ucvffmrs3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

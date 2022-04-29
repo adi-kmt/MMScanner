@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.datatransport:transport-runtime:2.2.6@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0732bbac446ebcfb1d6b7a6cd374b208/transformed/transport-runtime-2.2.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/29aef326f147a03ac692d10eba322ff6/transformed/transport-runtime-2.2.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/15910d6f1b32c9835fab736bdc18926d/transformed/transport-runtime-2.2.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b0bec2dd11becfa4f9021c1ddba35ef4/transformed/transport-runtime-2.2.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/b0bec2dd11becfa4f9021c1ddba35ef4/transformed/transport-runtime-2.2.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/b0bec2dd11becfa4f9021c1ddba35ef4/transformed/transport-runtime-2.2.6/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.datatransport/transport-runtime/2.2.6/7509bfbb3df6c8d1e8b5ab57eb22a40042d3ef64/transport-runtime-2.2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.mlkit:common:18.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ed70673ed7d08a283741afa64389d3bd/transformed/common-18.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a94ed860c4c427f364cc6ef38a2bc089/transformed/common-18.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e7f90c03470d8d45543c69a7583cd44b/transformed/common-18.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8c09bd14768fe51eecff2c5f8acbc7d7/transformed/common-18.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8c09bd14768fe51eecff2c5f8acbc7d7/transformed/common-18.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8c09bd14768fe51eecff2c5f8acbc7d7/transformed/common-18.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/common/18.0.0/886c0cfd902670b7c61f1b9d1d35790fb95d763b/common-18.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

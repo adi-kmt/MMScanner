@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.mlkit:barcode-scanning:17.0.2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/eabf29458df4f96c54cae42ad34ab7ec/transformed/barcode-scanning-17.0.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/05574290812922037e916631018d5807/transformed/barcode-scanning-17.0.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/966ed8118c7259f1d6721a21ece2d886/transformed/barcode-scanning-17.0.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c672bc10a33fbbe0a2dedf397e39a08f/transformed/barcode-scanning-17.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c672bc10a33fbbe0a2dedf397e39a08f/transformed/barcode-scanning-17.0.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c672bc10a33fbbe0a2dedf397e39a08f/transformed/barcode-scanning-17.0.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/barcode-scanning/17.0.2/ace98f39b262c59be4be4d52b871d1ba5dfff723/barcode-scanning-17.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
