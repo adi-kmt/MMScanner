@@ -19,6 +19,7 @@ import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.showToast
 import com.adi.mmscanner.utils.StateUtils
 import com.adi.mmscanner.viewmodel.BarcodeSendViewModel
+import com.adi.mmscanner.viewmodel.ViewModelFactory
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
@@ -62,7 +63,7 @@ class CaptureActivity : AppCompatActivity() {
 
         val repository = BarcodeRepository()
 
-        viewModel= ViewModelProvider(this, ViewModelFactoryS(repository)).get(BarcodeSendViewModel::class.java)
+        viewModel= ViewModelProvider(this, ViewModelFactory(repository)).get(BarcodeSendViewModel::class.java)
 
         viewModel.BarcodeLiveData.observe(this, Observer {data ->
 
