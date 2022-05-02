@@ -5,8 +5,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/02feac1b85ad104d812e2d3eb6f5af05/transformed/play-services-mlkit-barcode-scanning-18.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5e280ecd8864b14166d2ee8fc3233e9c/transformed/play-services-mlkit-barcode-scanning-18.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/52525552fbb589d2d49255022ed76a74/transformed/play-services-mlkit-barcode-scanning-18.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/52525552fbb589d2d49255022ed76a74/transformed/play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/52525552fbb589d2d49255022ed76a74/transformed/play-services-mlkit-barcode-scanning-18.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/69b0746c42b83cd79d2ebd3c494a18c7/transformed/play-services-mlkit-barcode-scanning-18.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/bbf7bed84b466681c2d2b0083792819e/transformed/play-services-mlkit-barcode-scanning-18.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bbf7bed84b466681c2d2b0083792819e/transformed/play-services-mlkit-barcode-scanning-18.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/bbf7bed84b466681c2d2b0083792819e/transformed/play-services-mlkit-barcode-scanning-18.0.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-mlkit-barcode-scanning/18.0.0/5f45fbc928b775108c5992c9c2e8e8465b0f627b/play-services-mlkit-barcode-scanning-18.0.0-javadoc.jar!/" />

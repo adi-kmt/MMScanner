@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.adi.mmscanner.repository.BarcodeRepository
 
 class ViewModelFactory(private val repository: BarcodeRepository): ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        when (modelClass){
-            BarcodeRecieveViewModel::class.java -> return BarcodeRecieveViewModel(repository) as T
 
-            BarcodeSendViewModel::class.java -> return  BarcodeSendViewModel(repository) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return when (modelClass){
+            GetDataVM::class.java -> GetDataVM(repository) as T
+
+            SendDataVM::class.java -> SendDataVM(repository) as T
 
             else -> throw IllegalArgumentException()
         }

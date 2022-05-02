@@ -5,10 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.adi.mmscanner.repository.BarcodeRepository
 import kotlinx.coroutines.launch
 
-class BarcodeRecieveViewModel(
+class GetDataVM(
     private val repository: BarcodeRepository
 )
     :ViewModel() {
+
+    /*
+    Should convert to LiveData to be observed by UI?
+     */
 
     fun retieveData() = repository.repogetData()
 }

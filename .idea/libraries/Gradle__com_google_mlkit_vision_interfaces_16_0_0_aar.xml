@@ -4,9 +4,11 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/de358dd840554fd3296b84200fa3d07f/transformed/vision-interfaces-16.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/341b61681f16465609cf99bdd65af1d9/transformed/vision-interfaces-16.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ffc35218ddfef3fb11be106207dd51bc/transformed/vision-interfaces-16.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ae2174f61cc82d282bbb4e9ba70c29a2/transformed/vision-interfaces-16.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ae2174f61cc82d282bbb4e9ba70c29a2/transformed/vision-interfaces-16.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ae2174f61cc82d282bbb4e9ba70c29a2/transformed/vision-interfaces-16.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8b8cfc6af0ef5ad08b9ea46585f24ba5/transformed/vision-interfaces-16.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0fc99c27927f219b6305ee5021a43ad6/transformed/vision-interfaces-16.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0fc99c27927f219b6305ee5021a43ad6/transformed/vision-interfaces-16.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0fc99c27927f219b6305ee5021a43ad6/transformed/vision-interfaces-16.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/vision-interfaces/16.0.0/745e6911e713b86e7e0548dac2a61a0c595faab/vision-interfaces-16.0.0-javadoc.jar!/" />

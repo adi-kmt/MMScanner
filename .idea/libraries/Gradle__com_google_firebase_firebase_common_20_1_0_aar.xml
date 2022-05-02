@@ -4,8 +4,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d4803f263413290a84bf463c4815c609/transformed/firebase-common-20.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f44ae8b179783d2252ec9cb79b0a5967/transformed/firebase-common-20.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c3c2fb9bc92cb491dccae68995c99165/transformed/firebase-common-20.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c3c2fb9bc92cb491dccae68995c99165/transformed/firebase-common-20.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c3c2fb9bc92cb491dccae68995c99165/transformed/firebase-common-20.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ed2724502a8b0d07abd4f761ae6a48cb/transformed/firebase-common-20.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e5ef0eb556f681ddcddefa09a2b7a3ae/transformed/firebase-common-20.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e5ef0eb556f681ddcddefa09a2b7a3ae/transformed/firebase-common-20.1.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e5ef0eb556f681ddcddefa09a2b7a3ae/transformed/firebase-common-20.1.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-common/20.1.0/6a93a4494e8fb8a7d153a0e51df9e534e13967ab/firebase-common-20.1.0-javadoc.jar!/" />

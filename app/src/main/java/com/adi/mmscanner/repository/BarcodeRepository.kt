@@ -35,8 +35,8 @@ class BarcodeRepository {
         val data = collection.get().await()
         val barcodedata = data.toObjects(Barcodedata::class.java)
 
-        emit(StateUtils.success(barcodedata))
+        emit(StateUtils.success(data = barcodedata))
     }.catch {
-        emit(StateUtils.failiure(it?.message.toString()))
+        emit(StateUtils.failiure(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 }

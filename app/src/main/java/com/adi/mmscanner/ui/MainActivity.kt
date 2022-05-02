@@ -3,6 +3,7 @@ package com.adi.mmscanner.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +14,7 @@ import com.adi.mmscanner.databinding.ActivityMainBinding
 import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.showToast
 import com.adi.mmscanner.utils.StateUtils
-import com.adi.mmscanner.viewmodel.BarcodeRecieveViewModel
+import com.adi.mmscanner.viewmodel.GetDataVM
 import com.adi.mmscanner.viewmodel.ViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,24 +22,18 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var viewModel: BarcodeRecieveViewModel
+    lateinit var viewModel: GetDataVM
 
 
-    val permissionsLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {permission ->
-        var count =0
-        permission.forEach { s, b ->
-//            Log.e("Permission", s)
-            if (!b){
-                showToast("Permissions not granted")
-            }else{
-                count ++
-            }
-        }
-        if (count == 2){
+    val permissionsLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {permission ->
+        if (permission){
             val intent = Intent(this, CaptureActivity::class.java)
             startActivity(intent)
+        }else{
+            showToast("Permissions not granted")
         }
     }
+
 
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +45,10 @@ class MainActivity : AppCompatActivity() {
         val repository =BarcodeRepository()
 
 
-        viewModel= ViewModelProvider(this, ViewModelFactory(repository)).get(BarcodeRecieveViewModel::class.java)
+        viewModel= ViewModelProvider(this, ViewModelFactory(repository)).get(GetDataVM::class.java)
 
         binding.clickimgBtn.setOnClickListener {
-           permissionsLauncher.launch(arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.INTERNET))
+           permissionsLauncher.launch(android.Manifest.permission.CAMERA)
         }
 
 
@@ -64,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.retieveData().collect { state ->
                 when (state) {
                     is StateUtils.Loading -> {
+                        Log.e("RV", "Loading")
                         binding.apply {
                             Barcoderv.visibility = View.GONE
                             progressbar.visibility = View.VISIBLE
@@ -71,17 +67,19 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     is StateUtils.Success -> {
+                        Log.e("RV", "Success")
                         binding.apply {
                             progressbar.visibility = View.GONE
                             EmptyTv.visibility = View.GONE
 
-                            state.data?.let {
+                            state.data.let {
                                 Barcoderv.visibility = View.VISIBLE
-                                Barcoderv.adapter = BarcodeAdapter(it)
+                                Barcoderv.adapter = BarcodeAdapter(it.toTypedArray())
                             }
                         }
                     }
                     is StateUtils.Failiure -> {
+                        Log.e("RV", state.message)
                         binding.apply {
                             Barcoderv.visibility = View.GONE
                             progressbar.visibility = View.GONE
@@ -93,7 +91,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
-
 }
