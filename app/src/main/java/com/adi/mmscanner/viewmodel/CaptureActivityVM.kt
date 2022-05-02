@@ -8,12 +8,9 @@ import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.Barcodedata
 import kotlinx.coroutines.launch
 
-class BarcodeSendViewModel(
+class CaptureActivityVM(
     private val repository: BarcodeRepository
 ): ViewModel() {
-
-    //Create live data, mutable livedata in list for posting during retrieve
-
 
     private val _BarcodeLiveData = MutableLiveData<Barcodedata>()
     val BarcodeLiveData: LiveData<Barcodedata> = _BarcodeLiveData

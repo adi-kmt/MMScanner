@@ -4,4 +4,6 @@
     <color name="off_white">#D4D6D6</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="semi_transparent">#99FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

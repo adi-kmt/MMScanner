@@ -6,10 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".ui.CaptureActivity">
 
+
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:lottie_rawRes="@raw/qrscan"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+
+    </RelativeLayout>
 
 
 

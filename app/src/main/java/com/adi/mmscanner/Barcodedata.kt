@@ -4,7 +4,7 @@ import android.graphics.Rect
 import java.util.*
 
 data class Barcodedata(
-    val main:String?,
-    val rect: Rect?,
-    val date: Long
-    )
+    val main:String?="",
+    val rect: Rect?=Rect(0, 0, 0, 0),
+    val date: Long?=0
+)

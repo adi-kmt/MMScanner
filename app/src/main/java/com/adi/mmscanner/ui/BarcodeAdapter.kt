@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adi.mmscanner.Barcodedata
 import com.adi.mmscanner.databinding.BarcodeRvItemBinding
 
-class BarcodeAdapter(val BarcodeList:List<Barcodedata>): RecyclerView.Adapter<BarcodeAdapter.ItemViewHolder>() {
+class BarcodeAdapter(val BarcodeList:Array<Barcodedata>): RecyclerView.Adapter<BarcodeAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val binding: BarcodeRvItemBinding): RecyclerView.ViewHolder(binding.root){
 
@@ -24,14 +24,12 @@ class BarcodeAdapter(val BarcodeList:List<Barcodedata>): RecyclerView.Adapter<Ba
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val currentItem = BarcodeList[position]
+        val currentItem = this.BarcodeList[position]
 
-        currentItem?.let {
+        currentItem.let {
             holder.bind(currentItem)
         }
     }
 
-    override fun getItemCount(): Int {
-        return BarcodeList.size
-    }
+    override fun getItemCount(): Int = BarcodeList.size
 }

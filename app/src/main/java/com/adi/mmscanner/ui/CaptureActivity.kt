@@ -1,11 +1,14 @@
 package com.adi.mmscanner.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Rational
+import android.view.Surface.ROTATION_0
 import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -18,7 +21,7 @@ import com.adi.mmscanner.databinding.ActivityCaptureBinding
 import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.showToast
 import com.adi.mmscanner.utils.StateUtils
-import com.adi.mmscanner.viewmodel.BarcodeSendViewModel
+import com.adi.mmscanner.viewmodel.CaptureActivityVM
 import com.adi.mmscanner.viewmodel.ViewModelFactory
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -32,20 +35,12 @@ import java.util.concurrent.Executors
 
 class CaptureActivity : AppCompatActivity() {
 
-    /*
-    -Maybe use image analyzer + dialog box on confirm, pass intent to previous activity
-    -Find a way to pass directly the data
-     */
-
-
     private lateinit var binding:ActivityCaptureBinding
-
-    val REQUEST_CODE = 10
 
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
 
-    private lateinit var viewModel: BarcodeSendViewModel
+    private lateinit var dataVM: CaptureActivityVM
 
 
 
@@ -63,9 +58,10 @@ class CaptureActivity : AppCompatActivity() {
 
         val repository = BarcodeRepository()
 
-        viewModel= ViewModelProvider(this, ViewModelFactory(repository)).get(BarcodeSendViewModel::class.java)
+        dataVM= ViewModelProvider(this, ViewModelFactory(repository)).get(CaptureActivityVM::class.java)
 
-        viewModel.BarcodeLiveData.observe(this, Observer {data ->
+        dataVM.BarcodeLiveData.observe(this, Observer { data ->
+            data.main?.let { showToast(it) }
 
     val Builder = AlertDialog.Builder(this)
         .setTitle("Barcode scanned is")
@@ -73,19 +69,26 @@ class CaptureActivity : AppCompatActivity() {
         .setPositiveButton("Confirm"){_, _ ->
             showToast("Confirm clicked")
 
-            //Call corutine using lfcycle scope
+            startActivity(Intent(this, MainActivity::class.java))
+
+            //Call coroutine using lifecycle scope
             lifecycleScope.launch {
-                viewModel.sendData(data).collect { state ->
-                    when (state) {
-                        is StateUtils.Loading -> {
-                            showToast("Losding")
+                dataVM.sendData(data).collect { state ->
+                    showToast(
+                        when(state){
+                            is StateUtils.Loading -> {
+                                "Loading"
+                            }
+                            is StateUtils.Success -> {
+                                "Sent"
+                            }
+                            is StateUtils.Failiure -> {
+                                "Try again"
+                            }
                         }
-                        is StateUtils.Success -> {
-                            showToast("Sent")
-                        }
-                        is StateUtils.Failiure -> {
-                            showToast("Try Again")
-                        }
+                    )
+                    if (state is StateUtils.Success){
+                        startActivity(Intent(this@CaptureActivity, MainActivity::class.java))
                     }
                 }
             }
@@ -95,20 +98,8 @@ class CaptureActivity : AppCompatActivity() {
         }
 
     val dialog = Builder.create()
-    //dialog.show()
-
-
+    dialog.show()
         })
-
-    }
-
-
-    private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
-        val planeProxy = image.planes[0]
-        val buffer: ByteBuffer = planeProxy.buffer
-        val bytes = ByteArray(buffer.remaining())
-        buffer.get(bytes)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 
 
@@ -122,8 +113,6 @@ class CaptureActivity : AppCompatActivity() {
                     super.onCaptureSuccess(image)
                     showToast("Image captured")
                     BarcodedataScanner(image,image.imageInfo.rotationDegrees)
-//                    showToast("Back here")
-//                    image.close()
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -143,22 +132,32 @@ class CaptureActivity : AppCompatActivity() {
             val cameraProvider:ProcessCameraProvider = cameraProviderFuture.get()
 
             val preview = Preview.Builder().build().also {
-                it.setSurfaceProvider(binding.viewFinder.surfaceProvider) } //why also is used
+                it.setSurfaceProvider(binding.viewFinder.surfaceProvider) }
 
             val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
             imageCapture= ImageCapture.Builder().build()
 
+            val viewPort = ViewPort.Builder(Rational(350, 350), ROTATION_0).build()
+
+            val useCase = imageCapture?.let {capture ->
+                UseCaseGroup.Builder()
+                .addUseCase(preview)
+                .addUseCase(capture)
+                .setViewPort(viewPort)
+                .build() }
+
+
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector,
-                    preview,
-                    imageCapture
-                )
+                useCase?.let {usecase ->
+                    cameraProvider.bindToLifecycle(this, cameraSelector,
+                        usecase
+                    )
+                }
             }catch (e:Exception){
                 Log.e("Camera error", "${e.message}")
             }
-
         }, ContextCompat.getMainExecutor(this))
     }
 
@@ -172,10 +171,6 @@ class CaptureActivity : AppCompatActivity() {
 
         val scanner = BarcodeScanning.getClient(options)
 
-        val bitmap = imageProxyToBitmap(Image)
-
-        bitmap?.let { abitmap ->
-//            val image = InputImage.fromBitmap(abitmap, rotationDegrees?:0)
 
             Image.image?.let {
                 val inputImage = InputImage.fromMediaImage(
@@ -187,15 +182,13 @@ class CaptureActivity : AppCompatActivity() {
 
                 scanner.process(inputImage)
                     .addOnSuccessListener { barcodes ->
-                        readBarcodes(barcodes) as List<Barcode>
+                        readBarcodes(barcodes) //as List<Barcode>
                     }
-                    .addOnFailureListener {
-                        it.message?.let { it1 -> showToast(it1) }
-                    }
-//                    .addOnCompleteListener {
-//                        Image.close()
-//                    }
-            }
+                    .addOnFailureListener {exception ->
+                        exception.message?.let { exmessage -> showToast(exmessage) }
+                    }.addOnCompleteListener {
+                            Image.close()
+                        }
         }
     }
 
@@ -208,17 +201,14 @@ class CaptureActivity : AppCompatActivity() {
                     val url = barcode.url?.url
                     val data = Barcodedata(url, rect, System.currentTimeMillis())
                     showToast("Barcode values are " + data.main + data.date + data.rect, false)
-//                    createDialog(data)
+                    dataVM.validateData(data)
                 }
                 Barcode.TYPE_PHONE -> {
                     val num = barcode.phone?.number
                     val data = Barcodedata(num, rect, System.currentTimeMillis())
 //                    data.main?.let { Log.e("Barcode data", it) }
                     showToast("Barcode values are " + data.main + data.date + data.rect, false)
-                    viewModel.validateData(data)
-//                    createDialog(data)
-//                    dialog.show()
-//                    setResult(10, Intent().putExtra("main",data.main).putExtra("Date", data.date))
+                    dataVM.validateData(data)
                 }
             }
         }
