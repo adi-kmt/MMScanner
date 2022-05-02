@@ -8,9 +8,9 @@ class ViewModelFactory(private val repository: BarcodeRepository): ViewModelProv
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when (modelClass){
-            GetDataVM::class.java -> GetDataVM(repository) as T
+            MainActivityVM::class.java -> MainActivityVM(repository) as T
 
-            SendDataVM::class.java -> SendDataVM(repository) as T
+            CaptureActivityVM::class.java -> CaptureActivityVM(repository) as T
 
             else -> throw IllegalArgumentException()
         }

@@ -21,7 +21,7 @@ import com.adi.mmscanner.databinding.ActivityCaptureBinding
 import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.showToast
 import com.adi.mmscanner.utils.StateUtils
-import com.adi.mmscanner.viewmodel.SendDataVM
+import com.adi.mmscanner.viewmodel.CaptureActivityVM
 import com.adi.mmscanner.viewmodel.ViewModelFactory
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -40,7 +40,7 @@ class CaptureActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
 
-    private lateinit var dataVM: SendDataVM
+    private lateinit var dataVM: CaptureActivityVM
 
 
 
@@ -58,7 +58,7 @@ class CaptureActivity : AppCompatActivity() {
 
         val repository = BarcodeRepository()
 
-        dataVM= ViewModelProvider(this, ViewModelFactory(repository)).get(SendDataVM::class.java)
+        dataVM= ViewModelProvider(this, ViewModelFactory(repository)).get(CaptureActivityVM::class.java)
 
         dataVM.BarcodeLiveData.observe(this, Observer { data ->
             data.main?.let { showToast(it) }
@@ -74,17 +74,21 @@ class CaptureActivity : AppCompatActivity() {
             //Call coroutine using lifecycle scope
             lifecycleScope.launch {
                 dataVM.sendData(data).collect { state ->
-                    when (state) {
-                        is StateUtils.Loading -> {
-                            showToast("Losding")
+                    showToast(
+                        when(state){
+                            is StateUtils.Loading -> {
+                                "Loading"
+                            }
+                            is StateUtils.Success -> {
+                                "Sent"
+                            }
+                            is StateUtils.Failiure -> {
+                                "Try again"
+                            }
                         }
-                        is StateUtils.Success -> {
-                            showToast("Sent")
-                            Intent()
-                        }
-                        is StateUtils.Failiure -> {
-                            showToast("Try Again")
-                        }
+                    )
+                    if (state is StateUtils.Success){
+                        startActivity(Intent(this@CaptureActivity, MainActivity::class.java))
                     }
                 }
             }
@@ -96,15 +100,6 @@ class CaptureActivity : AppCompatActivity() {
     val dialog = Builder.create()
     dialog.show()
         })
-    }
-
-
-    private fun imageProxyToBitmap(image: ImageProxy): Bitmap {
-        val planeProxy = image.planes[0]
-        val buffer: ByteBuffer = planeProxy.buffer
-        val bytes = ByteArray(buffer.remaining())
-        buffer.get(bytes)
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 
 
@@ -145,24 +140,24 @@ class CaptureActivity : AppCompatActivity() {
 
             val viewPort = ViewPort.Builder(Rational(350, 350), ROTATION_0).build()
 
-            val useCase = UseCaseGroup.Builder()
+            val useCase = imageCapture?.let {capture ->
+                UseCaseGroup.Builder()
                 .addUseCase(preview)
-                .addUseCase(imageCapture!!)
+                .addUseCase(capture)
                 .setViewPort(viewPort)
-                .build()
+                .build() }
 
 
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector,
-//                    preview,
-//                    imageCapture
-                useCase
-                )
+                useCase?.let {usecase ->
+                    cameraProvider.bindToLifecycle(this, cameraSelector,
+                        usecase
+                    )
+                }
             }catch (e:Exception){
                 Log.e("Camera error", "${e.message}")
             }
-
         }, ContextCompat.getMainExecutor(this))
     }
 
@@ -176,10 +171,6 @@ class CaptureActivity : AppCompatActivity() {
 
         val scanner = BarcodeScanning.getClient(options)
 
-//        val bitmap = imageProxyToBitmap(Image)
-
-//        bitmap.let { abitmap ->
-    //            val image = InputImage.fromBitmap(abitmap, rotationDegrees?:0)
 
             Image.image?.let {
                 val inputImage = InputImage.fromMediaImage(
@@ -193,12 +184,11 @@ class CaptureActivity : AppCompatActivity() {
                     .addOnSuccessListener { barcodes ->
                         readBarcodes(barcodes) //as List<Barcode>
                     }
-                    .addOnFailureListener {
-                        it.message?.let { it1 -> showToast(it1) }
+                    .addOnFailureListener {exception ->
+                        exception.message?.let { exmessage -> showToast(exmessage) }
                     }.addOnCompleteListener {
                             Image.close()
                         }
-//              }
         }
     }
 

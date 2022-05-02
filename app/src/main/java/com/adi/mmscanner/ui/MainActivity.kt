@@ -14,7 +14,7 @@ import com.adi.mmscanner.databinding.ActivityMainBinding
 import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.showToast
 import com.adi.mmscanner.utils.StateUtils
-import com.adi.mmscanner.viewmodel.GetDataVM
+import com.adi.mmscanner.viewmodel.MainActivityVM
 import com.adi.mmscanner.viewmodel.ViewModelFactory
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var viewModel: GetDataVM
+    lateinit var viewModel: MainActivityVM
 
 
     val permissionsLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {permission ->
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         val repository =BarcodeRepository()
 
 
-        viewModel= ViewModelProvider(this, ViewModelFactory(repository)).get(GetDataVM::class.java)
+        viewModel= ViewModelProvider(this, ViewModelFactory(repository)).get(MainActivityVM::class.java)
 
         binding.clickimgBtn.setOnClickListener {
            permissionsLauncher.launch(android.Manifest.permission.CAMERA)

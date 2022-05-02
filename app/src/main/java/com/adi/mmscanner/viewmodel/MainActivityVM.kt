@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.adi.mmscanner.repository.BarcodeRepository
 import kotlinx.coroutines.launch
 
-class GetDataVM(
+class MainActivityVM(
     private val repository: BarcodeRepository
 )
     :ViewModel() {

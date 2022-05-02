@@ -8,7 +8,7 @@ import com.adi.mmscanner.repository.BarcodeRepository
 import com.adi.mmscanner.Barcodedata
 import kotlinx.coroutines.launch
 
-class SendDataVM(
+class CaptureActivityVM(
     private val repository: BarcodeRepository
 ): ViewModel() {
 

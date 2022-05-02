@@ -8,10 +8,3 @@ data class Barcodedata(
     val rect: Rect?=Rect(0, 0, 0, 0),
     val date: Long?=0
 )
-//    ){
-//    constructor() : this(
-//        "",
-//        Rect(0, 0, 0, 0),
-//        0
-//    ) // Why??
-//}
